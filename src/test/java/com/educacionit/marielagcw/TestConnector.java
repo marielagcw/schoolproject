@@ -25,7 +25,9 @@ public class TestConnector {
     public static final String ANSI_BLINK = "\u001B[5m";
 
     public static void main(String[] args) {
+       
         LocalDateTime ldtInicio = LocalDateTime.now();
+       
         try (ResultSet rs = Connector // ResultSet es un conjunto de registros que se obtienen de la consulta
                 .getConnection() // Estoy pidiendo el get connection
                 .createStatement() // Le estoy pidiendo que ejecute una sentencia SQL
@@ -43,7 +45,7 @@ public class TestConnector {
         // Tomamos los tiempos de respuesta y decimos si es aceptable o no. 
         LocalDateTime ldtFinal = LocalDateTime.now();
         Duration duration = Duration.between(ldtInicio, ldtFinal);
-        if (duration.toSeconds() <= 3) {
+        if (duration.toSeconds() <= 2) {
             System.out.println(ANSI_GREEN + "Tiempo de respuesta: + " + duration.toMillis() + " ms, ACEPTABLE");
         } else {
             System.out.println(ANSI_RED + "Tiempo de respuesta: + " + duration.toMillis() + " ms, MUY LENTO");

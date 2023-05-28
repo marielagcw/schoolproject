@@ -14,6 +14,7 @@ public class Connector {
 
     public static Connection getConnection() {
         try {
+            // Queremos una sola conexión a la base de datos siempre
             if (conn == null || conn.isClosed()) {
                 conn = DriverManager.getConnection(url, user, pass);
             }
