@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.startup.Catalina;
-
 import com.educacionit.marielagcw.entities.Curso;
 import com.educacionit.marielagcw.enums.Dia;
 import com.educacionit.marielagcw.enums.Turno;
@@ -45,12 +43,31 @@ public class CursoRepository implements ICursoRepository {
 
     @Override
     public void remove(Curso curso) {
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        if (curso == null)
+            return;
+        try (PreparedStatement ps = conn.prepareStatement("delete from cursos where id=?")) {
+            ps.setInt(1, curso.getId());
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override
     public void update(Curso curso) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        if (curso == null)
+            return;
+        try (PreparedStatement ps = conn
+                .prepareStatement("update cursos set titulo=?, profesor=?, dia=?, turno=? where id=?")) {
+            ps.setString(1, curso.getTitulo());
+            ps.setString(2, curso.getProfesor());
+            ps.setString(3, curso.getDia().toString());
+            ps.setString(4, curso.getTurno().toString());
+            ps.setInt(5, curso.getId());
+            ps.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override

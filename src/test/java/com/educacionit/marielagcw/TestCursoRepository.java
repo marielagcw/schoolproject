@@ -1,7 +1,5 @@
 package com.educacionit.marielagcw;
 
-import org.checkerframework.checker.units.qual.s;
-
 import com.educacionit.marielagcw.connectors.Connector;
 import com.educacionit.marielagcw.entities.Curso;
 import com.educacionit.marielagcw.enums.Dia;
@@ -22,6 +20,21 @@ public class TestCursoRepository {
         // Método getById()
         System.out.println("===================================== >> GET BY ID");
         System.out.println(cursoRepository.getById(12));
+
+        // Método remove()
+        System.out.println("===================================== >> REMOVE");
+        cursoRepository.remove(cursoRepository.getById(12));
+        System.out.println(cursoRepository.getAll());
+
+        // Método update()
+        System.out.println("===================================== >> UPDATE");
+        curso = cursoRepository.getById(11);
+        if (curso != null && curso.getId() != 0) {
+            curso.setProfesor("Gutierrez");
+            curso.setTitulo("JavaScript");
+            cursoRepository.update(curso);
+        }
+        System.out.println(cursoRepository.getAll());
 
         // Método getAll()
         System.out.println("===================================== >> GET ALL");
