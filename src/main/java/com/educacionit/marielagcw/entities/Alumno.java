@@ -1,5 +1,7 @@
 package com.educacionit.marielagcw.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Alumno {
 
     // Atributos
@@ -7,6 +9,7 @@ public class Alumno {
     private String nombre;
     private String apellido;
     private int edad;
+    @JsonProperty("id_curso")
     private int idCurso;
 
     // Constructores
