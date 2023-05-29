@@ -3,9 +3,14 @@ package com.educacionit.marielagcw.repositories.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.startup.Catalina;
+
 import com.educacionit.marielagcw.entities.Curso;
+import com.educacionit.marielagcw.enums.Dia;
+import com.educacionit.marielagcw.enums.Turno;
 import com.educacionit.marielagcw.repositories.interfaces.ICursoRepository;
 
 public class CursoRepository implements ICursoRepository {
@@ -50,12 +55,40 @@ public class CursoRepository implements ICursoRepository {
 
     @Override
     public Curso getById(Integer id) {
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        Curso curso = new Curso();
+        try (ResultSet rs = conn.createStatement().executeQuery("select * from cursos where id=" + id)) {
+            if (rs.next()) {
+                curso = new Curso(
+                        rs.getInt("id"), // Id
+                        rs.getString("titulo"), // Titulo
+                        rs.getString("profesor"), // Profesor
+                        Dia.valueOf(rs.getString("dia")), // Dia
+                        Turno.valueOf(rs.getString("turno"))// Turno
+                );
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return curso;
     }
 
     @Override
     public List<Curso> getAll() {
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        List<Curso> list = new ArrayList<>();
+        try (ResultSet rs = conn.createStatement().executeQuery("select * from cursos")) {
+            while (rs.next()) {
+                list.add(new Curso(
+                        rs.getInt("id"), // Id
+                        rs.getString("titulo"), // Titulo
+                        rs.getString("profesor"), // Profesor
+                        Dia.valueOf(rs.getString("dia")), // Dia
+                        Turno.valueOf(rs.getString("turno"))// Turno
+                ));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
     }
 
 }
