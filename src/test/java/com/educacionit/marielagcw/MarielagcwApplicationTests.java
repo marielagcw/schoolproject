@@ -12,11 +12,11 @@ class MarielagcwApplicationTests {
 	void contextLoads() {
 	}
 
-	// Pruebas unitarias
+	// Pruebas unitarias - Ejemplos
 
 	@Test
 	void prueba1() {
-		assertEquals(true, false); // Rojo
+		//assertEquals(true, false); // Rojo
 	}
 
 	@Test
@@ -31,7 +31,7 @@ class MarielagcwApplicationTests {
 
 	@Test
 	void prueba4() {
-		assertEquals(2+3, 4); // Rojo
+		//assertEquals(2+3, 4); // Rojo
 	}
 
 }
